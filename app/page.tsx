@@ -1,8 +1,6 @@
-// لاحظ هنا استخدمنا نقطة واحدة (./) لأن المجلد بجانب هذا الملف مباشرة
 import MatchCard from './components/MatchCard';
 
 export default async function Home() {
-  // جلب البيانات الحقيقية من API (الدوري الإنجليزي)
   const res = await fetch('https://www.thesportsdb.com/api/v1/json/3/eventsnextleague.php?id=4328', {
     next: { revalidate: 60 } 
   });
@@ -23,6 +21,7 @@ export default async function Home() {
         {events.map((match: any) => (
           <MatchCard 
             key={match.idEvent}
+            id={match.idEvent} // <--- أضفنا هذا السطر لإرسال رقم المباراة الحقيقي
             league={match.strLeague}
             team1={match.strHomeTeam}
             team1Logo={`https://ui-avatars.com/api/?name=${match.strHomeTeam.substring(0,2)}&background=ffffff&color=121212&bold=true`}
